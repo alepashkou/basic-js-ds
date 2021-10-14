@@ -1,31 +1,63 @@
 const { NotImplementedError } = require('../extensions/index.js');
 
-// const { Node } = require('../extensions/list-tree.js');
+const { Node } = require('../extensions/list-tree.js');
 
-/**
-* Implement simple binary search tree according to task description
-* using Node from extensions
-*/
 module.exports = class BinarySearchTree {
+  constructor(){
+    this.elka = null;
+  }
 
   root() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    return this.elka;
   }
 
-  add(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  add(data) {
+
+    const newNod = new Node(data)
+    if(!this.elka){
+      return this.elka = newNod;;
+    }
+    let currentElka = this.elka
+    while(currentElka){
+      if(newNod.value < currentElka.value){
+        if(!currentElka.left){
+          currentElka.left = newNod;
+        }
+        currentElka= currentElka.left
+      } else {
+        if(!currentElka.right){
+          currentElka.right = newNod;
+        }
+        currentElka = currentElka.right
+      }
+    }
   }
 
-  has(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  has(data) {
+    let currentElka = this.elka
+    
+    for (let i = 0; i<100000000000000; i++){
+      if(currentElka === null){return false};
+      if(currentElka.value === data){return true};
+      if(currentElka.value > data){
+        currentElka = currentElka.left
+      } else {
+        currentElka = currentElka.right
+      }
+    }
   }
 
-  find(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  find(data) {
+    let currentElka = this.elka
+    for (let i = 0; i<100000000000000; i++){
+      if(currentElka === null){return null};
+      if(currentElka.data === data){return currentElka};
+      if(currentElka.value > data){
+        currentElka = currentElka.left
+      } else {
+        currentElka = currentElka.right
+      }
+    }
   }
 
   remove(/* data */) {
@@ -34,13 +66,23 @@ module.exports = class BinarySearchTree {
   }
 
   min() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    let currentElka = this.elka
+    for(let i=0; i<1000000000000;i++){
+      currentElka = currentElka.left
+      if (currentElka.left === null){
+        return currentElka.value
+      }
+    }
   }
 
   max() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    let currentElka = this.elka
+    for(let i=0; i<1000000000000;i++){
+      currentElka = currentElka.right
+      if (currentElka.right === null){
+        return currentElka.value
+      }
+    }
   }
 
 }

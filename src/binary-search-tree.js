@@ -19,14 +19,16 @@ module.exports = class BinarySearchTree {
     }
     let currentElka = this.elka
     while(currentElka){
-      if(newNod.value < currentElka.value){
+      if(newNod.data < currentElka.data){
         if(!currentElka.left){
           currentElka.left = newNod;
+          break;
         }
         currentElka= currentElka.left
       } else {
         if(!currentElka.right){
           currentElka.right = newNod;
+          break;
         }
         currentElka = currentElka.right
       }
@@ -34,30 +36,34 @@ module.exports = class BinarySearchTree {
   }
 
   has(data) {
+    console.log(data)
     let currentElka = this.elka
     
-    for (let i = 0; i<100000000000000; i++){
+    while(currentElka){
       if(currentElka === null){return false};
-      if(currentElka.value === data){return true};
-      if(currentElka.value > data){
+      if(currentElka.data === data){return true};
+      if(currentElka.data > data){
         currentElka = currentElka.left
       } else {
         currentElka = currentElka.right
       }
     }
+    return false;
   }
 
   find(data) {
     let currentElka = this.elka
-    for (let i = 0; i<100000000000000; i++){
+    
+    while(currentElka){
       if(currentElka === null){return null};
       if(currentElka.data === data){return currentElka};
-      if(currentElka.value > data){
+      if(currentElka.data > data){
         currentElka = currentElka.left
       } else {
         currentElka = currentElka.right
       }
     }
+    return null;
   }
 
   remove(/* data */) {
@@ -66,23 +72,24 @@ module.exports = class BinarySearchTree {
   }
 
   min() {
+
     let currentElka = this.elka
-    for(let i=0; i<1000000000000;i++){
+    while (currentElka.left) {
       currentElka = currentElka.left
-      if (currentElka.left === null){
-        return currentElka.value
-      }
     }
+
+    return currentElka.data
   }
+  
 
   max() {
+
     let currentElka = this.elka
-    for(let i=0; i<1000000000000;i++){
+    while (currentElka.right) {
       currentElka = currentElka.right
-      if (currentElka.right === null){
-        return currentElka.value
-      }
     }
+
+    return currentElka.data
   }
 
 }
